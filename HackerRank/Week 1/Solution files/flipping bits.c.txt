@@ -1,0 +1,17 @@
+#include <stdio.h>
+
+unsigned int flippingBits(unsigned int n) {
+    return ~n; 
+}
+
+int main() {
+    int q;
+    unsigned int n;
+
+    scanf("%d", &q); 
+    for (int i = 0; i < q; i++) {
+        scanf("%u", &n); // Read the integer
+        printf("%u\n", flippingBits(n));
+    }
+    return 0;
+}
