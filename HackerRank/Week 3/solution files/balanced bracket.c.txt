@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+char* isBalanced(char* s) {
+    int n = strlen(s);
+    char* stack = (char*)malloc(n * sizeof(char));
+    int top = -1;
+
+    for (int i = 0; i < n; i++) {
+        char c = s[i];
+
+        // If opening bracket, push to stack
+        if (c == '(' || c == '{' || c == '[') {
+            stack[++top] = c;
+        } else {
+            // If closing bracket but stack is empty -> unbalanced
+            if (top == -1) {
+                free(stack);
+                return "NO";
+            }
+
+            char topChar = stack[top--]; 
+            if ((c == ')' && topChar != '(') ||
+                (c == '}' && topChar != '{') ||
+                (c == ']' && topChar != '[')) {
+                free(stack);
+                return "NO";
+            }
+        }
+    }
+
+    
+    if (top == -1) {
+        free(stack);
+        return "YES";
+    } else {
+        free(stack);
+        return "NO";
+    }
+}
+
+int main() {
+    int t;
+    scanf("%d", &t);
+    while (t--) {
+        char s[1000];
+        scanf("%s", s);
+        printf("%s\n", isBalanced(s));
+    }
+    return 0;
+}
